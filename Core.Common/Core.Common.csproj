@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E9E3811D-8388-4123-9E09-C44C096274C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core.Common</RootNamespace>
+    <AssemblyName>Core.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.94.2\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.2, Version=16.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v16.2, Version=16.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.9.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.9.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.5.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.5\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.4.1\lib\net461\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember.Signed, Version=1.4.1.0, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.Signed.1.4.1\lib\net461\FastMember.Signed.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.5.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\DelgateHelper.cs" />
+    <Compile Include="Helpers\DoubleExtensions.cs" />
+    <Compile Include="Helpers\StringtoExtensions.cs" />
+    <Compile Include="Interfaces\Excell\IAttributeWriter.cs" />
+    <Compile Include="Interfaces\Excell\IClassViewer.cs" />
+    <Compile Include="Interfaces\Excell\IPredictionMatrixWriter.cs" />
+    <Compile Include="Interfaces\GroupingManager\GroupElementsByMinElements.cs" />
+    <Compile Include="Interfaces\ICoverGradeService.cs" />
+    <Compile Include="Interfaces\ICoverMatrixClassificator.cs" />
+    <Compile Include="Interfaces\ICoverMatrixGenerator.cs" />
+    <Compile Include="Interfaces\ICoverMatrixManager.cs" />
+    <Compile Include="Interfaces\GroupingManager\IGroupingManager.cs" />
+    <Compile Include="Interfaces\IDataObjectsConverter.cs" />
+    <Compile Include="Interfaces\IMatrixToGridMatrix.cs" />
+    <Compile Include="Interfaces\Excell\IExcelWriter.cs" />
+    <Compile Include="Interfaces\ISaveFileDialog.cs" />
+    <Compile Include="Interfaces\IOpenFileDialog.cs" />
+    <Compile Include="Interfaces\ITxtExporter.cs" />
+    <Compile Include="Interfaces\IValidateService.cs" />
+    <Compile Include="Interfaces\IAttributeColumnConverter.cs" />
+    <Compile Include="Interfaces\ICoverCalculator.cs" />
+    <Compile Include="Interfaces\IDataReader.cs" />
+    <Compile Include="Interfaces\IFileReader.cs" />
+    <Compile Include="Interfaces\IFileChecker.cs" />
+    <Compile Include="Interfaces\IFileReaderProvider.cs" />
+    <Compile Include="Interfaces\ITrainingObjectsConverter.cs" />
+    <Compile Include="Items\AttributeDescription.cs" />
+    <Compile Include="Items\AttributeGroupsOfObjectsCover.cs" />
+    <Compile Include="Items\CoverSampleResult.cs" />
+    <Compile Include="Helpers\DataObjectHelper.cs" />
+    <Compile Include="Items\GroupMember.cs" />
+    <Compile Include="Items\GroupOfDataObjectsCover.cs" />
+    <Compile Include="Items\MatrixFeatures\CoverResult.cs" />
+    <Compile Include="Items\MatrixFeatures\Matrix.cs" />
+    <Compile Include="Items\MatrixFeatures\MatrixRow.cs" />
+    <Compile Include="Items\MatrixRowColumn.cs" />
+    <Compile Include="Items\ProgressBarModel.cs" />
+    <Compile Include="Items\RowColumnObject.cs" />
+    <Compile Include="Items\DataObject.cs" />
+    <Compile Include="Items\GroupOfDataObjects.cs" />
+    <Compile Include="Items\InputData.cs" />
+    <Compile Include="Items\Result.cs" />
+    <Compile Include="Items\AttributeGroupsOfObjects.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Items\FileData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

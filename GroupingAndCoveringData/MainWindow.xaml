@@ -1,0 +1,176 @@
+﻿<Window x:Class="GroupingAndCoveringData.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
+        mc:Ignorable="d"             
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel, IsDesignTimeCreatable=True}"
+        xmlns:controls="clr-namespace:LoadingPanelSample.Controls"
+        xmlns:viewModels="clr-namespace:Models.ViewModels;assembly=Models"
+
+        Title="Generator pokryć zbiorów" Height="535" Width="850"
+        MinHeight="535" MinWidth="775"
+        MaxHeight="535" MaxWidth="780">
+
+    <Grid Name="MainGrid" Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="115*"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="26*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Grid Name="ParamGrid" Background="AliceBlue" Grid.Row="0" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="2" Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <Button x:Name="ButtonReadFile" Content="Otwórz plik" Command="{Binding CmdReadFile}" Width="100" Height="35"/>
+
+
+
+
+            </StackPanel>
+            <TextBox   Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Grid.Row="1"  VerticalScrollBarVisibility ="Visible" Margin="2" HorizontalAlignment="Stretch" Name="TxtRawData" IsReadOnly="True" Text="{Binding RawDataString, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"   />
+            <StackPanel Grid.Column="3" Grid.ColumnSpan="3"  Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Label x:Name="LabellowInput" >
+                    <StackPanel>
+                        <TextBlock Text="LOW"/>
+                        <TextBox IsEnabled="{Binding RunButtonIndicatorVisible, UpdateSourceTrigger=PropertyChanged}" x:Name="TextBoxLOW"    Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}"  Height="20" Width="120">
+                            <TextBox.Text>
+                                <Binding Path="LOW" Converter='{StaticResource Converter}' UpdateSourceTrigger="PropertyChanged"
+                                     ValidatesOnNotifyDataErrors="True" ValidatesOnExceptions="True" ValidatesOnDataErrors="True" StringFormat="{}{0:#,#.00}}" />
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                </Label>
+
+
+                <Label x:Name="LabelHIGHInput" >
+                    <StackPanel>
+                        <TextBlock Text="HIGH"/>
+                        <TextBox IsEnabled="{Binding RunButtonIndicatorVisible, UpdateSourceTrigger=PropertyChanged}" x:Name="TextBoxHIGH" Height="20" Width="120"  Validation.ErrorTemplate="{StaticResource ValidationTemplate}"  Style="{StaticResource TextBoxInError}">
+                            <TextBox.Text>
+                                <Binding Path="HIGH" Converter='{StaticResource Converter}'  StringFormat="{}{0:#,#.00}}" UpdateSourceTrigger="PropertyChanged"
+                                     ValidatesOnNotifyDataErrors="True" ValidatesOnExceptions="True" ValidatesOnDataErrors="True"/>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                </Label>
+
+
+
+
+                <StackPanel IsEnabled="{Binding RunButtonIndicatorVisible, UpdateSourceTrigger=PropertyChanged}" Margin="0,6">
+                    <CheckBox x:Name="CheckBox" IsChecked="{Binding UseStep, UpdateSourceTrigger=PropertyChanged}" Content="Krok"/>
+                    <TextBox  IsEnabled="{Binding UseStep}" x:Name="TextBoxStep"    Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}"  Height="20" Width="120">
+                        <TextBox.Text>
+                            <Binding Path="Step"  Converter='{StaticResource Converter}'  StringFormat="{}{0:#,#.00}}" UpdateSourceTrigger="PropertyChanged"
+                                 ValidatesOnNotifyDataErrors="True" ValidatesOnExceptions="True" ValidatesOnDataErrors="True"/>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+
+            </StackPanel>
+            <!--<StackPanel Grid.Column="3" Grid.ColumnSpan="3"   Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top">-->
+            <Label x:Name="LabelhighInput1" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                <StackPanel >
+                    <TextBlock Text="Metoda grupowania"/>
+                    <ComboBox x:Name="GroupingMethods" Height="20" Width="220" IsEnabled="{Binding RunButtonIndicatorVisible, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding MethodsDelegates}"  SelectedItem="{Binding SelectedMethod}" DisplayMemberPath = "MethodName" SelectedIndex="0">
+
+                        <!--<TextBox.Text>
+                            <Binding Path="high" StringFormat="{}{0:#,#.00}}" UpdateSourceTrigger="PropertyChanged"
+                                     ValidatesOnNotifyDataErrors="True" ValidatesOnExceptions="True" ValidatesOnDataErrors="True"/>
+                        </TextBox.Text>-->
+                    </ComboBox>
+                </StackPanel>
+            </Label>
+            <Label Margin="-2" x:Name="ParamInputLabel" Grid.Row="2" Grid.Column="5" HorizontalAlignment="Left" VerticalAlignment="Top"  >
+                <StackPanel>
+                    <TextBlock Text="{Binding ParamInputText}"/>
+                    <TextBox IsEnabled="{Binding RunButtonIndicatorVisible, UpdateSourceTrigger=PropertyChanged}" x:Name="ParamInput"    Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}"  Height="20" Width="120">
+                        <TextBox.Text>
+                            <Binding Path="ParamInput" Converter='{StaticResource Converter}' UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"
+                                         ValidatesOnNotifyDataErrors="True" ValidatesOnExceptions="True" ValidatesOnDataErrors="True" StringFormat="{}{0:00}}" />
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+            </Label>
+
+
+
+
+            <!--</StackPanel>-->
+            <StackPanel Grid.Column="3" Grid.ColumnSpan="3" Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top">
+
+
+                <Grid>
+                    <ProgressBar  Visibility="{Binding RunIndicatorVisible,Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" Width="215" Height="35" Minimum="0" Maximum="100" Value="{Binding Progress.Progress}" Name="pbStatus" />
+                    <TextBlock  Visibility="{Binding RunIndicatorVisible,Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:#.00}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+                <Button x:Name="ButtonRun" Margin="5" Content="Uruchom"  Visibility="{Binding RunButtonIndicatorVisible,Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="35" Command="{Binding CmdComputeData}" />
+                <Button x:Name="ButtonCancel" Margin="5" Content="Anuluj" Visibility="{Binding RunIndicatorVisible,Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="35" Command="{Binding CmdCancelComputeData}" />
+                <controls:CircularProgressBar x:Name="progressBarRun" 
+                                              Visibility="{Binding RunIndicatorVisible,Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top"
+                                              Height="45"
+                                              Margin="5" Width="40"
+                />
+
+            </StackPanel>
+            <StackPanel  Grid.ColumnSpan="5" Margin="1" Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+
+                <Label x:Name="Labellow"  ContentStringFormat="LOW:{0}" Content="{Binding CoverMatrixlow}" HorizontalAlignment="Left" Margin="5" />
+                <Label x:Name="Labelhigh" ContentStringFormat="LOW:{0}" Content="{Binding CoverMatrixhigh}" HorizontalAlignment="Left" Margin="5"/>
+
+                <!--<Button x:Name="ButtonPrevious" IsEnabled="{Binding IsPreviousPageEnabled}" Content="Poprzedni" Width="75" Height="30" Margin="5"/>
+            <Label x:Name="LabelStatus" Content="{Binding CurrentPageString, UpdateSourceTrigger=PropertyChanged }" Margin="5"/>
+            <Button x:Name="ButtonNext" IsEnabled="{Binding IsNextPageEnabled}" Content="Następny"  Width="75" Height="30" Margin="5"/>-->
+                <Button x:Name="TrenToExcell" Content="Eksport txt treningowe" Command="{Binding CmdExportTrnToTxt}"   Width="130" Height="30" Margin="5"/>
+                <Button x:Name="TstToExcell" Content="Eksport txt testowe" Command="{Binding CmdExportTstToTxt}"   Width="120" Height="30" Margin="5"/>
+                <Button x:Name="ButtonToExcell" Content="Eksport do Excela" Command="{Binding CmdExportToExcel}"   Width="100" Height="30" Margin="5"/>
+                <controls:CircularProgressBar x:Name="progressBarExcell" 
+                                              Visibility="{Binding ExcelIndicatorVisible,Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top"
+                                              Height="30"
+                                              Margin="5" Width="40"
+                />
+            </StackPanel>
+
+        </Grid>
+
+
+
+
+        <DataGrid  Grid.Row="1" Grid.ColumnSpan="3" IsReadOnly="True" ColumnWidth="70" HorizontalAlignment="Stretch" x:Name="DataGrid" ItemsSource="{Binding CoverMatrixDataTable}" Margin="2"    />
+
+
+
+
+
+
+
+
+
+
+
+
+    </Grid>
+</Window>
